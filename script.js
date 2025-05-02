@@ -1,11 +1,14 @@
-let targetTime = new Date().getTime() + 1 * 30 * 60 * 1000;
-
 let countdownEl = document.getElementById('countdown');
 let countdownContainer = document.getElementById('countdown-container');
 let videoContainer = document.getElementById('video-container');
 
+// Calculate target time: next midnight
+let now = new Date();
+let targetTime = new Date(now);
+targetTime.setHours(24, 0, 0, 0); // Set to next midnight
+
 function updateCountdown() {
-  let now = new Date().getTime();
+  let now = new Date();
   let diff = targetTime - now;
 
   if (diff <= 0) {
@@ -21,4 +24,5 @@ function updateCountdown() {
   countdownEl.innerHTML = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
+updateCountdown(); // Run immediately
 setInterval(updateCountdown, 1000);
